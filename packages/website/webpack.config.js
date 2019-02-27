@@ -32,12 +32,24 @@ const config = {
         rules: [
             {
                 test: /\.js$/,
-                loader: 'source-map-loader',
-                exclude: [
-                    // instead of /\/node_modules\//
-                    path.join(process.cwd(), 'node_modules'),
-                    path.join(process.cwd(), '../..', 'node_modules'),
-                ],
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        "plugins": ["transform-runtime"],
+                        'presets': [
+                            ['env', {
+                                'targets': {
+                                    "chrome": 41
+                                },
+                            }],
+                        ],
+                    },
+                }, {
+                    loader: 'source-map-loader',
+                }],
+                exclude: function(modulePath) {
+                    return /node_modules\/(lodash|react|websocket|jump.js)/.test(modulePath);
+                },
             },
             {
                 test: /\.tsx?$/,
