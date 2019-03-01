@@ -489,50 +489,6 @@
     ethers "~4.0.4"
     lodash "^4.17.11"
 
-"@0x/contracts-asset-proxy@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@0x/contracts-asset-proxy/-/contracts-asset-proxy-1.0.2.tgz#48a432a52a019ee632e50456f2687c85a5b57535"
-  dependencies:
-    "@0x/base-contract" "^4.0.1"
-    "@0x/contracts-erc20" "^1.0.2"
-    "@0x/contracts-erc721" "^1.0.2"
-    "@0x/contracts-test-utils" "^3.0.1"
-    "@0x/contracts-utils" "^2.0.1"
-    "@0x/order-utils" "^5.0.0"
-    "@0x/types" "^2.0.1"
-    "@0x/typescript-typings" "^4.0.0"
-    "@0x/utils" "^4.0.2"
-    "@0x/web3-wrapper" "^4.0.1"
-    ethereum-types "^2.0.0"
-    lodash "^4.17.5"
-
-"@0x/contracts-erc20@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@0x/contracts-erc20/-/contracts-erc20-1.0.2.tgz#67cfefd4458b262d575bb1b07f63bc3dfed4daeb"
-  dependencies:
-    "@0x/base-contract" "^4.0.1"
-    "@0x/contracts-exchange-libs" "^1.0.2"
-    "@0x/contracts-utils" "^2.0.1"
-    "@0x/types" "^2.0.1"
-    "@0x/typescript-typings" "^4.0.0"
-    "@0x/utils" "^4.0.2"
-    "@0x/web3-wrapper" "^4.0.1"
-    ethereum-types "^2.0.0"
-    lodash "^4.17.5"
-
-"@0x/contracts-erc721@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@0x/contracts-erc721/-/contracts-erc721-1.0.2.tgz#e7309ae57de266bb9c4947de50ba16a89203ad08"
-  dependencies:
-    "@0x/base-contract" "^4.0.1"
-    "@0x/contracts-utils" "^2.0.1"
-    "@0x/types" "^2.0.1"
-    "@0x/typescript-typings" "^4.0.0"
-    "@0x/utils" "^4.0.2"
-    "@0x/web3-wrapper" "^4.0.1"
-    ethereum-types "^2.0.0"
-    lodash "^4.17.5"
-
 "@0x/contracts-exchange-libs@1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@0x/contracts-exchange-libs/-/contracts-exchange-libs-1.0.2.tgz#0682c01cdb3e36100bda0ffbdf9badb5b8a01fc4"
@@ -1613,7 +1569,7 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
 
-"@types/minimatch@*", "@types/minimatch@3.0.3":
+"@types/minimatch@*", "@types/minimatch@3.0.3", "@types/minimatch@^3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
 
@@ -7971,7 +7927,7 @@ got@^6.7.1:
 
 graceful-fs@4.1.15, graceful-fs@^3.0.0, graceful-fs@^4.0.0, graceful-fs@^4.1.10, graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9, graceful-fs@~1.2.0:
   version "4.1.15"
-  resolved "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
+  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
 
 "graceful-readlink@>= 1.0.0":
   version "1.0.1"
@@ -13517,6 +13473,15 @@ react-dom@^16.3.2:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-dom@^16.4.2:
+  version "16.8.3"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.3.tgz#ae236029e66210783ac81999d3015dfc475b9c32"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.13.3"
+
 react-dom@^16.5.2:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.2.tgz#b69ee47aa20bab5327b2b9d7c1fe2a30f2cfa9d7"
@@ -13819,6 +13784,15 @@ react@^16.3.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react@^16.4.2:
+  version "16.8.3"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.8.3.tgz#c6f988a2ce895375de216edcfaedd6b9a76451d9"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.13.3"
 
 react@^16.5.2:
   version "16.5.2"
@@ -14689,6 +14663,13 @@ schedule@^0.5.0:
   version "0.5.0"
   resolved "https://registry.npmjs.org/schedule/-/schedule-0.5.0.tgz#c128fffa0b402488b08b55ae74bb9df55cc29cc8"
   dependencies:
+    object-assign "^4.1.1"
+
+scheduler@^0.13.3:
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.13.3.tgz#bed3c5850f62ea9c716a4d781f9daeb9b2a58896"
+  dependencies:
+    loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
 schema-utils@^0.4.4:
