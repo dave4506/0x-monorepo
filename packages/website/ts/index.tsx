@@ -1,3 +1,5 @@
+import '@babel/polyfill';
+
 import { MuiThemeProvider } from 'material-ui/styles';
 import * as React from 'react';
 import { render } from 'react-dom';

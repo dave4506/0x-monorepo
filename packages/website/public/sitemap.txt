@@ -13,6 +13,7 @@ https://0x.org/community
 https://0x.org/launch-kit
 https://0x.org/instant
 https://0x.org/eap
+https://0x.org/extensions
 https://0x.org/market-maker
 https://0x.org/governance
 https://0x.org/why

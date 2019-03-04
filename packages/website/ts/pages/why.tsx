@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import ScrollableAnchor, { configureAnchors } from 'react-scrollable-anchor';
+import * as Scroll from 'react-scroll';
 import styled from 'styled-components';
 
 import { Banner } from 'ts/components/banner';
@@ -15,6 +15,9 @@ import { Heading } from 'ts/components/text';
 import { documentConstants } from 'ts/utils/document_meta_constants';
 
 import { ModalContact } from '../components/modals/modal_contact';
+
+const scroller = Scroll.scroller;
+const ScrollElement = Scroll.Element;
 
 const offersData = [
     {
@@ -86,12 +89,11 @@ const useCaseSlides = [
     },
 ];
 
-configureAnchors({ offset: -60 });
-
 export class NextWhy extends React.Component {
     public state = {
         isContactModalOpen: false,
     };
+
     public render(): React.ReactNode {
         const buildAction = (
             <Button href="/docs" isWithArrow={true} isAccentColor={true}>
@@ -139,15 +141,15 @@ export class NextWhy extends React.Component {
                 <Section maxWidth="1170px" isFlex={true} isFullWidth={true}>
                     <Column>
                         <NavStickyWrap offsetTop="130px">
-                            <ChapterLink href="#benefits">Benefits</ChapterLink>
-                            <ChapterLink href="#cases">Use Cases</ChapterLink>
-                            <ChapterLink href="#functionality">Features</ChapterLink>
+                            <ChapterLink href="#benefits" onClick={this._animateScroll.bind(this, 'benefits')} >Benefits</ChapterLink>
+                            <ChapterLink href="#cases" onClick={this._animateScroll.bind(this, 'cases')}>Use Cases</ChapterLink>
+                            <ChapterLink href="#functionality" onClick={this._animateScroll.bind(this, 'functionality')}>Features</ChapterLink>
                         </NavStickyWrap>
                     </Column>
 
                     <Column width="55%" maxWidth="826px">
                         <Column width="100%" maxWidth="560px" padding="0 30px 0 0">
-                            <ScrollableAnchor id="benefits">
+                            <ScrollElement name="benefits">
                                 <SectionWrap>
                                     <SectionTitle size="medium" marginBottom="60px" isNoBorder={true}>
                                         What 0x offers
@@ -164,9 +166,9 @@ export class NextWhy extends React.Component {
                                         />
                                     ))}
                                 </SectionWrap>
-                            </ScrollableAnchor>
+                            </ScrollElement>
 
-                            <ScrollableAnchor id="cases">
+                            <ScrollElement name="cases">
                                 <SectionWrap isNotRelative={true}>
                                     <SectionTitle size="medium" marginBottom="60px">
                                         Use Cases
@@ -182,9 +184,9 @@ export class NextWhy extends React.Component {
                                         ))}
                                     </Slider>
                                 </SectionWrap>
-                            </ScrollableAnchor>
+                            </ScrollElement>
 
-                            <ScrollableAnchor id="functionality">
+                            <ScrollElement name="functionality">
                                 <SectionWrap>
                                     <SectionTitle size="medium" marginBottom="60px">
                                         Exchange Functionality
@@ -201,7 +203,7 @@ export class NextWhy extends React.Component {
                                         />
                                     ))}
                                 </SectionWrap>
-                            </ScrollableAnchor>
+                            </ScrollElement>
                         </Column>
                     </Column>
                 </Section>
@@ -224,6 +226,15 @@ export class NextWhy extends React.Component {
     public _onDismissContactModal = (): void => {
         this.setState({ isContactModalOpen: false });
     };
+
+    private _animateScroll(to: string): void {
+        scroller.scrollTo(to, {
+            duration: 300,
+            delay: 1,
+            smooth: true,
+            offset: -60,
+        });
+    }
 }
 
 interface SectionProps {
@@ -233,7 +244,7 @@ interface SectionProps {
 const SectionWrap = styled.div<SectionProps>`
     position: ${props => !props.isNotRelative && 'relative'};
 
-    & + & {
+    & {
         padding-top: 60px;
         margin-top: 60px;
     }

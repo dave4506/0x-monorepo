@@ -8,10 +8,8 @@ declare module 'reach__dialog';
 declare module 'react-flickity-component';
 declare module 'react-anchor-link-smooth-scroll';
 declare module 'react-responsive';
-declare module 'react-scrollable-anchor';
 declare module 'react-headroom';
-declare module 'es5-shim';
-declare module 'es6-shim';
+declare module '@babel/polyfill';
 
 declare module '*.json' {
     const json: any;

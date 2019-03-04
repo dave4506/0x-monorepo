@@ -10,6 +10,121 @@ const GIT_SHA = childProcess
     .toString()
     .trim();
 
+const prod_rules = [
+    {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+    },
+    {
+        test: /\.js$/,
+        use: [{
+            loader: 'babel-loader',
+            options: {
+                "plugins": ["transform-runtime"],
+                'presets': [
+                    ['env', {
+                        'targets': {
+                            "chrome": 41
+                        },
+                    }],
+                ],
+            },
+        }, {
+            loader: 'source-map-loader',
+        }],
+        exclude: function(modulePath) {
+            return /node_modules/.test(modulePath) &&
+                /node_modules\/(core-js|lodash|react|websocket)/.test(modulePath);
+        },
+    },
+    {
+        test: /\.md$/,
+        use: 'raw-loader',
+    },
+    {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader',
+        exclude: /node_modules/,
+    },
+    {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader'],
+    },
+    {
+        test: /\.svg$/,
+        use: [
+            {
+                loader: 'babel-loader',
+                options: {
+                    "plugins": ["transform-runtime"],
+                    'presets': [
+                        ['env', {
+                            'targets': {
+                                "chrome": 41
+                            },
+                        }],
+                    ],
+                },
+            },
+            {
+                loader: "react-svg-loader",
+                options: {
+                    svgo: {
+                        plugins: [
+                            { removeViewBox: false }
+                        ],
+                    }
+                }
+            }
+        ]
+    },
+]
+
+const dev_rules = [
+    {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+    },
+    {
+        test: /\.js$/,
+        use: [ {
+            loader: 'source-map-loader',
+        }],
+        exclude: function(modulePath) {
+            return /node_modules/.test(modulePath) &&
+                /node_modules\/(core-js|lodash|react|websocket)/.test(modulePath);
+        },
+    },
+    {
+        test: /\.md$/,
+        use: 'raw-loader',
+    },
+    {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader',
+        exclude: /node_modules/,
+    },
+    {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader'],
+    },
+    {
+        test: /\.svg$/,
+        use: [
+            {
+                loader: "react-svg-loader",
+                options: {
+                    svgo: {
+                        plugins: [
+                            { removeViewBox: false }
+                        ],
+                    }
+                }
+            }
+        ]
+    },
+]
+
 const config = {
     entry: ['./ts/index.tsx'],
     output: {
@@ -29,61 +144,7 @@ const config = {
         },
     },
     module: {
-        rules: [
-            {
-                test: /\.js$/,
-                use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        "plugins": ["transform-runtime"],
-                        'presets': [
-                            ['env', {
-                                'targets': {
-                                    "chrome": 41
-                                },
-                            }],
-                        ],
-                    },
-                }, {
-                    loader: 'source-map-loader',
-                }],
-                exclude: function(modulePath) {
-                    return /node_modules\/(lodash|react|websocket|jump.js)/.test(modulePath);
-                },
-            },
-            {
-                test: /\.tsx?$/,
-                loader: 'awesome-typescript-loader',
-            },
-            {
-                test: /\.md$/,
-                use: 'raw-loader',
-            },
-            {
-                test: /\.less$/,
-                loader: 'style-loader!css-loader!less-loader',
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.css$/,
-                loaders: ['style-loader', 'css-loader'],
-            },
-            {
-                test: /\.svg$/,
-                use: [
-                    {
-                        loader: "react-svg-loader",
-                        options: {
-                            svgo: {
-                                plugins: [
-                                    { removeViewBox: false }
-                                ],
-                            }
-                        }
-                    }
-                ]
-            },
-        ],
+        rules: [],
     },
     optimization: {
         minimizer: [
@@ -126,13 +187,16 @@ const config = {
 
 module.exports = (_env, argv) => {
     let plugins = [];
+    let rules = [];
     if (argv.mode === 'development') {
         config.mode = 'development';
         plugins.concat([
             new BundleAnalyzerPlugin(),
         ]);
+        rules = dev_rules;
     } else {
         config.mode = 'production';
+        rules = prod_rules;
         plugins = plugins.concat([
             // Since we do not use moment's locale feature, we exclude them from the bundle.
             // This reduces the bundle size by 0.4MB.
@@ -156,6 +220,7 @@ module.exports = (_env, argv) => {
     console.log('i ｢atl｣: Mode: ', config.mode);
 
     config.plugins = plugins;
+    config.module.rules = rules;
     console.log('i ｢atl｣: Plugin Count: ', config.plugins.length);
 
     return config;
